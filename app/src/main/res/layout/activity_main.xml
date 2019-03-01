@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    tools:context=".MainActivity"
+    android:paddingTop="15dp"
+    android:paddingBottom="25dp"
+
+
+
+    >
+
+    <TextView
+        android:id="@+id/tv_yourscore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/your_score"
+        android:textSize="25sp"
+        android:textColor="@color/score"
+        android:paddingLeft="15dp"
+
+
+
+        />
+    <TextView
+        android:id="@+id/tv_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textSize="25sp"
+        android:textColor="@color/score"
+        android:layout_toRightOf="@id/tv_yourscore"
+        android:layout_marginLeft="16dp"
+
+        />
+
+    <TextView
+        android:id="@+id/tv_yourtime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/time"
+        android:layout_below="@id/tv_yourscore"
+        android:layout_alignRight="@id/tv_yourscore"
+        android:textSize="25sp"
+        android:textColor="@color/score"
+        android:drawableLeft="@drawable/clock_1s"
+        android:drawablePadding="7dp"
+
+        />
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textSize="25sp"
+        android:textColor="@color/score"
+        android:layout_below="@id/tv_score"
+        android:layout_alignRight="@id/tv_score"
+        android:layout_marginLeft="5dp"
+
+        />
+
+
+    <TextView
+        android:id="@+id/tv_yourhs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="High score : "
+        android:layout_below="@id/tv_yourtime"
+        android:layout_alignRight="@id/tv_yourtime"
+        android:textSize="25sp"
+        android:textColor="@color/score"
+
+
+        />
+
+    <TextView
+        android:id="@+id/tv_hs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:textSize="25sp"
+        android:text="0"
+        android:textColor="@color/score"
+        android:layout_below="@id/tv_time"
+        android:layout_alignRight="@id/tv_score"
+        android:layout_marginLeft="5dp"
+
+        />
+
+    <TextView
+        android:id="@+id/tv_quest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textSize="70sp"
+        android:text="12+3=18"
+        android:textColor="@color/number"
+        android:gravity="center"
+        />
+
+    <ImageView
+        android:id="@+id/img_true"
+        android:layout_width="90dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="45dp"
+        />
+
+    <ImageView
+        android:id="@+id/img_false"
+        android:layout_width="90dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_false"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="45dp"
+        />
+
+
+
+
+
+
+
+</RelativeLayout>

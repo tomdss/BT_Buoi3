@@ -1,5 +1,6 @@
 package com.t3h.bt_buoi3;
 
+import android.os.AsyncTask;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
@@ -7,21 +8,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener,MyAsync.Callback {
 //    Handler nguoiduathu;
 
     private int a;
     private int b;
     private int c;
     private int result = 0;
-    private int timeC = 10;
+//    private int timeC = 10;
     private int score;
     private int hs;
     private int checker;
@@ -32,16 +36,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView tvQuest;
     private ImageView imgTrue;
     private ImageView imgFalse;
+    private MyAsync myAsync;
+
+    private ProgressBar pbTime;
+
+
+
+
 //    private ImageView imgPlay;
     private final String TAG = getClass().getSimpleName();
-    private CountDownTimer countDownTimer;
+//    private CountDownTimer countDownTimer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        getActionBar().hide();
         setContentView(R.layout.activity_main);
+//        getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
+        getSupportActionBar().hide();
         inits();
         load();
+
         imgTrue.setOnClickListener(this);
         imgFalse.setOnClickListener(this);
 //        imgPlay.setOnClickListener(this);
@@ -71,17 +86,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tvQuest = findViewById(R.id.tv_quest);
         imgTrue = findViewById(R.id.img_true);
         imgFalse = findViewById(R.id.img_false);
+        pbTime = findViewById(R.id.pb_time);
 //        imgPlay = findViewById(R.id.img_play);
 
 
     }
 
     public void gameOver() {
-        countDownTimer.cancel();
+//        countDownTimer.cancel();
         score=0;
         tvQuest.setText("Game Over");
         tvScore.setText("0");
-
+//        Toast.makeText(this, ""+myAsync.isCancelled(), Toast.LENGTH_SHORT).show();
+//        myAsync.cancel(true);
+//        Toast.makeText(this, ""+myAsync.isCancelled(), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, ""+myAsync.isCancelled(), Toast.LENGTH_SHORT).show();
 
 
     }
@@ -110,6 +129,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+
+
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -118,9 +140,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 //to do code
                 if (a + b == c) {
-                    loadtime();
+//                    loadtime();
+                    doTime();
                     load();
+
                 } else {
+
                     gameOver();
                 }
 
@@ -131,9 +156,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //to do code
 
                 if (a + b != c) {
-                    loadtime();
+//                    loadtime();
+                    doTime();
                     load();
                 } else {
+
                     gameOver();
                 }
 
@@ -146,6 +173,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+
+    private void doTime(){
+        myAsync = new MyAsync(this);
+        myAsync.execute();
+        pbTime.setProgress(100);
+//        myAsync.cancel(false);
+    }
+
+    @Override
+    public void Finish() {
+        myAsync.cancel(false);
+
+        Toast.makeText(this, "DONE", Toast.LENGTH_SHORT).show();
+        gameOver();
+
+
+    }
+
+    @Override
+    public void Update(String number) {
+        tvTime.setText(number);
+        pbTime.setProgress(Integer.parseInt(number));
+
+    }
+
+
 //    Handler.Callback callback = new Handler.Callback(){
 //        @Override
 //        public boolean handleMessage(Message msg) {
@@ -156,24 +209,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        }
 //    };
 
-    public void loadtime() {
-        timeC = 10;
+//    public void loadtime() {
+////        timeC = 10;
+////
+////         countDownTimer=new CountDownTimer(10000, 1000) {
+////            @Override
+////            public void onTick(long millisUntilFinished) {
+////                    tvTime.setText(timeC+"");
+////                    timeC--;
+////
+////            }
+//
+//            @Override
+//            public void onFinish() {
+//                gameOver();
+//
+//            }
+//        }.start();
+//
+//
+//    }
 
-         countDownTimer=new CountDownTimer(10000, 1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                    tvTime.setText(timeC+"");
-                    timeC--;
-
-            }
-
-            @Override
-            public void onFinish() {
-                gameOver();
-
-            }
-        }.start();
 
 
-    }
+
 }
+
